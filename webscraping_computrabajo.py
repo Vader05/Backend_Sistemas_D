@@ -141,10 +141,14 @@ def scraping_ofertas(con, url_principal, prefix_url, sufix_url, pagina_inicial, 
                     oferta["lugar"]=lugar.get_text()
                 
                 #OBTENEMOS LA FECHA DE AVISO
-                fecha_publicacion=el.find("span",{"class":"dO"}).get_text()
-                oferta["time_publicacion"]=fecha_publicacion
-                print("FECHA: ", oferta["time_publicacion"])
-                fecha_aviso=get_fecha_publicacion(fecha_actual, fecha_publicacion)
+                try:
+                    fecha_publicacion=el.find("span",{"class":"dO"}).get_text()
+                    oferta["time_publicacion"]=fecha_publicacion
+                    print("FECHA: ", oferta["time_publicacion"])
+                    fecha_aviso=get_fecha_publicacion(fecha_actual, fecha_publicacion)
+                except:
+                    fecha_aviso=None
+
                 if fecha_aviso!=None:
                     oferta["fecha_publicacion"]=fecha_aviso
                 else:

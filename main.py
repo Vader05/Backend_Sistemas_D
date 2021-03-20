@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 import principal
 
 app= Flask(__name__)
@@ -11,7 +11,8 @@ def not_found (error):
 
 @app.route('/', methods=['GET'])
 def index ():
-    return "puro sonso  causa"
+    return "puro mongolito"
+
 @app.route('/sd' ,methods=['GET'])
 def webscraping():
     principal.webscraping_sd()
