@@ -1,8 +1,10 @@
 from flask import Flask, render_template, jsonify
+from flask-cors import CORS
 import principal
 
 
 app= Flask(__name__)
+CORS(app)
 PORT= 5000
 DEBUG=True
 
