@@ -5,6 +5,7 @@ from dboperation import DBOfertadetalle
 from dboperation import DBkeyWord
 #JOSEF
 from dboperation import DBKeyworSearch
+from dboperation import DBAvisos
 
 
 
@@ -17,7 +18,18 @@ class Controller:
         self.dbkeyword = DBkeyWord()
         #JOSEF
         self.dbkeywordsearch = DBKeyworSearch()
+        #Avisos
+        self.dbavisos = DBAvisos()
 
+    #controlador de avisos
+    def listarAvisosDeOferta(self, conn):
+        ofertaAvisos= self.dbavisos.listarOfertas(conn)
+        return ofertaAvisos
+
+    #controlador de paginas
+    def listarPaginas(self, conn):
+        paginas = self.dbwebscraping.listarPaginas(conn)
+        return paginas
 
     def registrar_webscraping(self, con, webscraping):
         id = self.dbwebscraping.insert_webscraping(con, webscraping)

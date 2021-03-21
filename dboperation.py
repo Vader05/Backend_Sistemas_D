@@ -30,6 +30,31 @@ class DBWebscraping:
         print("id webscraping: ",id_webscraping)        
         return id_webscraping
 
+    def listarPaginas(self, connection):
+        try:
+            mydb = connection.connect()
+            cur = mydb.cursor()
+
+            sql= "SELECT * FROM webscraping"
+            cur.execute(sql)
+
+            array_de_paginas = []
+            row = cur.fetchone()
+            while row is not None:
+                array_de_paginas.append(row)
+                row = cur.fetchone()
+            
+            cur.close()
+            mydb.close() 
+
+        except (Exception, psycopg2.DatabaseError) as error:                
+                print ("-------------Exception, psycopg2.DatabaseError-------------------")
+                print (error)
+                print("error al consultar las paginas escrapeadas!!")
+                mydb.close()        
+            
+        return array_de_paginas
+
 
 class DBOferta:
     def __init__(self):
@@ -168,6 +193,36 @@ class DBkeyWord:
             mydb.close()
         
         return palabras
+
+class DBAvisos:
+    def __init__(self):
+        pass
+
+    def listarOfertas(self, connection):
+        try:
+            mydb = connection.connect()
+            cur = mydb.cursor()
+
+            sql= "SELECT * FROM OFERTA"
+            cur.execute(sql)
+
+            array_de_avisos = []
+            row = cur.fetchone()
+            while row is not None:
+                array_de_avisos.append(row)
+                row = cur.fetchone()
+            
+            cur.close()
+            mydb.close() 
+
+        except (Exception, psycopg2.DatabaseError) as error:                
+                print ("-------------Exception, psycopg2.DatabaseError-------------------")
+                print (error)
+                print("error al consultar los avisos en oferta!!")
+                mydb.close()        
+            
+        return array_de_avisos
+
 
 #JOSEF
 class DBKeyworSearch:

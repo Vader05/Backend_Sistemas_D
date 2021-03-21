@@ -122,6 +122,20 @@ if __name__ == "__main__":
     delati_buscojobs()
     delati_portal(INDEED)
 '''
+def listarAvisoDeOferta():
+    controller = Controller()
+    con = connect_bd()
+    return controller.listarAvisosDeOferta(con)
+
+def listarPaginasWeb():
+    controller = Controller()
+    con = connect_bd()
+    return controller.listarPaginas(con)
+
+def listarPalabras():
+    controller = Controller()
+    con= connect_bd()
+    return controller.getwords(con)
 
 def webscraping_sd ():
     #josef
