@@ -124,9 +124,9 @@ if __name__ == "__main__":
 '''
 
 def webscraping_sd ():
-    delati_portal(COMPUTRABAJO)
     #josef
     delati_buscojobs()
+    delati_portal(COMPUTRABAJO)
     delati_portal(INDEED)
 
    

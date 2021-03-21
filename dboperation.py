@@ -36,7 +36,7 @@ class DBOferta:
         pass
 
     def insert_oferta(self, connection, oferta):        
-        id_oferta=0
+        #id_oferta=0
         mydb = connection.connect()
         try:
             #mydb = connection.connect()
