@@ -11,6 +11,15 @@ DEBUG=True
 def not_found (error):
     return "Not found"
 
+@app.route('/', methods=['GET'])
+def index ():
+    return '''<ul>
+        <li>Endpoint para anuncios de tabla oferta: /api/oferta </li>
+        <li>Endpoint para especialidades de tabla keyword_search: /api/keyword </li>
+        <li>Endpoint para portales escrapeados de tabla webscraping: /api/webscraping </li>
+        <li>Endpoint para iniciar el webscraping ¡¡No tocar :u!!: /start </li>
+        </ul>'''
+
 @app.route('/api/oferta', methods=['GET'])
 def api_all():
     avisoresponse=[]
@@ -51,6 +60,7 @@ def listarPortalesWebscraping ():
         webscraping.append(response)
 
     return jsonify(webscraping)
+
 @app.route('/api/keyword', methods= ['GET'])
 def listarKeyword():
     keyword=[]
@@ -63,11 +73,8 @@ def listarKeyword():
         keyword.append(response)
     return jsonify(keyword)
 
-@app.route('/', methods=['GET'])
-def index ():
-    return "puro mongolito"
 
-@app.route('/sd' ,methods=['GET'])
+@app.route('/start' ,methods=['GET'])
 def webscraping():
     principal.webscraping_sd()
     return "iniciando webscraping"
