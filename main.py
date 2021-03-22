@@ -75,6 +75,19 @@ def listarKeyword():
         keyword.append(response)
     return jsonify(keyword)
 
+@app.route('/api/piechart', methods=['GET'])
+def obtenerEstadisticasPiecharm():
+    response=[]
+    estadistic= principal.estaditicasEspecialidades()
+    for res in estadistic:
+        metrica = {
+            'especialidad': res[0] ,
+            'cantidad': res[1],
+            'mes': res[3]
+        }
+        response.append(metrica)
+    print(response)
+    return jsonify(response)
 
 @app.route('/start' ,methods=['GET'])
 def webscraping():

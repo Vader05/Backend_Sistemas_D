@@ -255,6 +255,48 @@ class DBKeyworSearch:
             
         return array_de_tuplas
 
+class DBEstadisticas:
+    def __init__(self):
+        pass
+
+    def pycharm(self, connection):
+        mydb= connection.connect()
+        try:
+            #mydb= connection.connect()
+            mycursor= mydb.cursor()
+            sql= '''select keyword_search.descripcion, count(*), SUBSTRING(cast(oferta.fecha_publicacion as varchar),6,2) as mes, 
+                    case 
+                        when SUBSTRING(cast(oferta.fecha_publicacion as varchar),6,2) like ('01') then 'ENERO' 
+                        when SUBSTRING(cast(oferta.fecha_publicacion as varchar),6,2) like ('02') then 'FEBRERO' 
+                        when SUBSTRING(cast(oferta.fecha_publicacion as varchar),6,2) like ('03') then 'MARZO' 
+                        when SUBSTRING(cast(oferta.fecha_publicacion as varchar),6,2) like ('04') then 'ABRIL' 
+                        when SUBSTRING(cast(oferta.fecha_publicacion as varchar),6,2) like ('05') then 'MAYO' 
+                        when SUBSTRING(cast(oferta.fecha_publicacion as varchar),6,2) like ('06') then 'JUNIO' 
+                        when SUBSTRING(cast(oferta.fecha_publicacion as varchar),6,2) like ('07') then 'JULIO'
+                        when SUBSTRING(cast(oferta.fecha_publicacion as varchar),6,2) like ('08') then 'AGOSTO' 
+                        when SUBSTRING(cast(oferta.fecha_publicacion as varchar),6,2) like ('09') then 'SEPTIEMBRE' 
+                        when SUBSTRING(cast(oferta.fecha_publicacion as varchar),6,2) like ('10') then 'OCTUBRE' 
+                        when SUBSTRING(cast(oferta.fecha_publicacion as varchar),6,2) like ('11') then 'NOVIEMBRE'
+                        when SUBSTRING(cast(oferta.fecha_publicacion as varchar),6,2) like ('12') then 'DICIEMBRE'
+                    END FECHA_MES
+                    from keyword_search
+                        join webscraping on keyword_search.id_keyword = webscraping.id_keyword 
+                        join oferta on webscraping.id_webscraping = oferta.id_webscraping
+                    group by keyword_search.descripcion, mes'''
+            
+            mycursor.execute(sql)
+            estadisticas = list(mycursor)
+            # close the communication with the PostgreSQL
+            mycursor.close()
+            mydb.close()
+        except (Exception, psycopg2.DatabaseError) as error:
+            print ("-------------Exception, psycopg2.DatabaseError-------------------")
+            print (error)
+            print("KEYWORD ERROR")
+            mydb.close()
+        
+        return estadisticas
+
 class DatesDB:
     def __init__(self):
         pass

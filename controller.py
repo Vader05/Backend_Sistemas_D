@@ -6,8 +6,7 @@ from dboperation import DBkeyWord
 #JOSEF
 from dboperation import DBKeyworSearch
 from dboperation import DBAvisos
-
-
+from dboperation import DBEstadisticas
 
 
 class Controller:
@@ -20,6 +19,8 @@ class Controller:
         self.dbkeywordsearch = DBKeyworSearch()
         #Avisos
         self.dbavisos = DBAvisos()
+        #Estadisticas
+        self.dbestadisticas = DBEstadisticas()
 
     #controlador de avisos
     def listarAvisosDeOferta(self, conn):
@@ -30,6 +31,10 @@ class Controller:
     def listarPaginas(self, conn):
         paginas = self.dbwebscraping.listarPaginas(conn)
         return paginas
+
+    def obtener_estadisticas(self, conn):
+        estad= self.dbestadisticas.pycharm(conn)
+        return estad
 
     def registrar_webscraping(self, con, webscraping):
         id = self.dbwebscraping.insert_webscraping(con, webscraping)

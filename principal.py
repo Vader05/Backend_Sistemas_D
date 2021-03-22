@@ -137,6 +137,11 @@ def listarPalabras():
     con= connect_bd()
     return controller.getwords(con)
 
+def estaditicasEspecialidades():
+    controller = Controller()
+    con= connect_bd()
+    return controller.obtener_estadisticas(con)
+
 def webscraping_sd ():
     #josef
     delati_buscojobs()
