@@ -19,6 +19,7 @@ def index ():
         <li>Endpoint para anuncios de tabla oferta: /api/oferta </li>
         <li>Endpoint para especialidades de tabla keyword_search: /api/keyword </li>
         <li>Endpoint para portales escrapeados de tabla webscraping: /api/webscraping </li>
+        <li>Endpoint para estadisticas de las especialidades : /api/piechart </li>
         <li>Endpoint para iniciar el webscraping ¡¡No tocar :u!!: /start </li>
         </ul>'''
 
