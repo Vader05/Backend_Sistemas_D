@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, Response
 from flask_cors import CORS
 import principal
 
@@ -20,6 +20,7 @@ def index ():
         <li>Endpoint para especialidades de tabla keyword_search: /api/keyword </li>
         <li>Endpoint para portales escrapeados de tabla webscraping: /api/webscraping </li>
         <li>Endpoint para estadisticas de las especialidades : /api/piechart </li>
+        <li>Endpoint para data csv de las especialidades : /data_csv/keyword_name </li>
         <li>Endpoint para iniciar el webscraping ¡¡No tocar :u!!: /start </li>
         </ul>'''
 
@@ -89,6 +90,14 @@ def obtenerEstadisticasPiecharm():
         response.append(metrica)
     print(response)
     return jsonify(response)
+@app.route('/data_csv/<string:especialidad>', methods=['GET'])
+def get_data(especialidad=None):
+    data=""
+    datostotales= principal.get_data_fechas(especialidad)
+    for d in datostotales:
+        csv = str(d[0])+","+str(d[1])+'\n'
+        data=data+csv
+    return Response(data)
 
 @app.route('/start' ,methods=['GET'])
 def webscraping():

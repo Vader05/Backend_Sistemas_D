@@ -142,6 +142,11 @@ def estaditicasEspecialidades():
     con= connect_bd()
     return controller.obtener_estadisticas(con)
 
+def get_data_fechas(keyword):
+    controller= Controller()
+    conn=connect_bd()
+    return controller.get_data_csv(conn, keyword)
+
 def webscraping_sd ():
     #josef
     delati_buscojobs()

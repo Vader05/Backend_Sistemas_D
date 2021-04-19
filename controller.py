@@ -35,6 +35,10 @@ class Controller:
     def obtener_estadisticas(self, conn):
         estad= self.dbestadisticas.pycharm(conn)
         return estad
+    
+    def get_data_csv(self, conn, keyword):
+        response=self.dbestadisticas.get_data(conn, keyword)
+        return response
 
     def registrar_webscraping(self, con, webscraping):
         id = self.dbwebscraping.insert_webscraping(con, webscraping)

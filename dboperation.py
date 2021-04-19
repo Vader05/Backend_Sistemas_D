@@ -297,6 +297,37 @@ class DBEstadisticas:
         
         return estadisticas
 
+    def get_data(self, connection, keyword):
+        array_fechas = []
+        try:
+            mydb = connection.connect()
+            cur = mydb.cursor()                                    
+
+            sql = '''select oferta.fecha_publicacion, count(*)
+                        from oferta
+                        join webscraping on oferta.id_webscraping = webscraping.id_webscraping 
+                        join keyword_search on webscraping.id_keyword = keyword_search.id_keyword
+                    group by keyword_search.descripcion, oferta.fecha_publicacion 
+                        having keyword_search.descripcion = '{0}';'''.format(keyword)
+            
+            cur.execute(sql)  
+            row = cur.fetchone()
+            while row is not None:
+                array_fechas.append(row)
+                row = cur.fetchone()
+
+            # close the communication with the PostgreSQL
+            cur.close()
+            mydb.close()                           
+
+        except (Exception, psycopg2.DatabaseError) as error:                
+                print ("-------------Exception, psycopg2.DatabaseError-------------------")
+                print (error)
+                print("fechas csv ERROR!!")
+                mydb.close()        
+            
+        return array_fechas
+
 class DatesDB:
     def __init__(self):
         pass
