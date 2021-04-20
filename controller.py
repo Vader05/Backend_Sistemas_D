@@ -32,6 +32,10 @@ class Controller:
         paginas = self.dbwebscraping.listarPaginas(conn)
         return paginas
 
+    def get_proy(self, conn):
+        response= self.dbestadisticas.proyecciones_siguiente_mes(conn)
+        return response
+
     def obtener_estadisticas(self, conn):
         estad= self.dbestadisticas.pycharm(conn)
         return estad

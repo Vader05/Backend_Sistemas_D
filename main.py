@@ -90,6 +90,7 @@ def obtenerEstadisticasPiecharm():
         response.append(metrica)
     print(response)
     return jsonify(response)
+
 @app.route('/data_csv/<string:especialidad>', methods=['GET'])
 def get_data(especialidad=None):
     data=""
@@ -98,6 +99,20 @@ def get_data(especialidad=None):
         csv = str(d[0])+","+str(d[1])+'\n'
         data=data+csv
     return Response(data)
+
+@app.route('/api/data_proyecciones', methods=['GET'])
+def proyecciones():
+    response=[]
+    proyeccion= principal.get_proyecciones()
+    for res in proyeccion:
+        proy = {
+            'especialidad': res[0] ,
+            'cantidad': res[1],
+            'fecha': res[2]
+        }
+        response.append(proy)
+    print(response)
+    return jsonify(response)
 
 @app.route('/start' ,methods=['GET'])
 def webscraping():

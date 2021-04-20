@@ -147,6 +147,11 @@ def get_data_fechas(keyword):
     conn=connect_bd()
     return controller.get_data_csv(conn, keyword)
 
+def get_proyecciones():
+    controller = Controller()
+    conn= connect_bd()
+    return controller.get_proy(conn)
+
 def webscraping_sd ():
     #josef
     delati_buscojobs()

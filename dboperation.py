@@ -327,6 +327,47 @@ class DBEstadisticas:
                 mydb.close()        
             
         return array_fechas
+    
+    def proyecciones_siguiente_mes(self, connection):
+        try:
+            mydb = connection.connect()
+            cur = mydb.cursor()                                    
+
+            sql = '''select especialidad, cantidad,
+                    case 
+                        when SUBSTRING(cast(fecha_proy as varchar),6,2) like ('01') then 'ENERO' 
+                        when SUBSTRING(cast(fecha_proy as varchar),6,2) like ('02') then 'FEBRERO' 
+                        when SUBSTRING(cast(fecha_proy as varchar),6,2) like ('03') then 'MARZO' 
+                        when SUBSTRING(cast(fecha_proy as varchar),6,2) like ('04') then 'ABRIL' 
+                        when SUBSTRING(cast(fecha_proy as varchar),6,2) like ('05') then 'MAYO' 
+                        when SUBSTRING(cast(fecha_proy as varchar),6,2) like ('06') then 'JUNIO' 
+                        when SUBSTRING(cast(fecha_proy as varchar),6,2) like ('07') then 'JULIO'
+                        when SUBSTRING(cast(fecha_proy as varchar),6,2) like ('08') then 'AGOSTO' 
+                        when SUBSTRING(cast(fecha_proy as varchar),6,2) like ('09') then 'SEPTIEMBRE' 
+                        when SUBSTRING(cast(fecha_proy as varchar),6,2) like ('10') then 'OCTUBRE' 
+                        when SUBSTRING(cast(fecha_proy as varchar),6,2) like ('11') then 'NOVIEMBRE'
+                        when SUBSTRING(cast(fecha_proy as varchar),6,2) like ('12') then 'DICIEMBRE'
+                    END FECHA_MES
+                    from proyeccion'''
+            cur.execute(sql)  
+            
+            array_de_tuplas = []
+            row = cur.fetchone()
+            while row is not None:
+                array_de_tuplas.append(row)
+                row = cur.fetchone()
+
+            # close the communication with the PostgreSQL
+            cur.close()
+            mydb.close()                           
+
+        except (Exception, psycopg2.DatabaseError) as error:                
+                print ("-------------Exception, psycopg2.DatabaseError-------------------")
+                print (error)
+                print("JOSEFF ERROR")
+                mydb.close()        
+            
+        return array_de_tuplas
 
 class DatesDB:
     def __init__(self):
