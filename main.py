@@ -21,6 +21,7 @@ def index ():
         <li>Endpoint para portales escrapeados de tabla webscraping: /api/webscraping </li>
         <li>Endpoint para estadisticas de las especialidades : /api/piechart </li>
         <li>Endpoint para data csv de las especialidades : /data_csv/keyword_name </li>
+        <li>Endpoint para proyecciones de las especialidades : /api/data_proyecciones </li>
         <li>Endpoint para iniciar el webscraping ¡¡No tocar :u!!: /start </li>
         </ul>'''
 
