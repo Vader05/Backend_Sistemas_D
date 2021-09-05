@@ -42,8 +42,8 @@ def api_all():
             'url_pagina':aviso[7],
             'area' : aviso[8],
             'oferta_detalle': aviso[11],
-            'time_publicacion': aviso[14],
-            'id_anuncioempleo': aviso[15]
+            'time_publicacion': aviso[13],
+            'id_anuncioempleo': aviso[14]
         }
         avisoresponse.append(anuncio)
     return jsonify(avisoresponse)
